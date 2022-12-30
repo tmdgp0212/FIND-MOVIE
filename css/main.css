@@ -183,14 +183,4 @@ button {
 }
 #wrap .movies button.material-symbols-outlined:hover {
   background-color: var(--righter-primary);
-}
-
-.more {
-  height: 30px;
-  height: 0;
-  background-image: url(../images/logo_FM_rd.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: height 0.2s;
 }/*# sourceMappingURL=main.css.map */
