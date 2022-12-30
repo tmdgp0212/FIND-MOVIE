@@ -124,7 +124,19 @@ button {
   } //main
   
   .movies {
-    transform: translateY(-80px);
+    transform: translateY(-100px);
+
+    h3 {
+      text-align: center;
+      line-height: 4;
+
+      span {
+        color: var(--primary-color);
+        margin-right: 5px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
   
     ul {
       display: flex;

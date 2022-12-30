@@ -111,7 +111,17 @@ button {
   background-color: var(--righter-primary);
 }
 #wrap .movies {
-  transform: translateY(-80px);
+  transform: translateY(-100px);
+}
+#wrap .movies h3 {
+  text-align: center;
+  line-height: 4;
+}
+#wrap .movies h3 span {
+  color: var(--primary-color);
+  margin-right: 5px;
+  font-size: 18px;
+  font-weight: 600;
 }
 #wrap .movies ul {
   display: flex;

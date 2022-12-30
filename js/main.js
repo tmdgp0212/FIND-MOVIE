@@ -2,9 +2,11 @@ const $searchForm = document.querySelector("main>form");
 const $input = $searchForm.querySelector("input");
 const $years = $searchForm.querySelector("select");
 const $movieContainer = document.querySelector(".movies");
+const $movieCounter = $movieContainer.querySelector('h3');
 const $movies = $movieContainer.querySelector("ul");
 const $err = $movieContainer.querySelector(".err");
 const $more = document.querySelector(".more");
+const $select = document.querySelector("form>select");
 
 
 // 검색키워드를 저장
@@ -14,8 +16,10 @@ const search = {
   page: 1
 }
 
+//검색내용이 출력되어있는 상태를 관리
 let searched = false;
 
+//영화 API를 받아오는 함수
 async function getMovies() {
   const s = `&s=${search.keyword}`
   const y = `&y=${search.year}`
@@ -23,16 +27,26 @@ async function getMovies() {
   const res = await fetch(`https://omdbapi.com/?apikey=7035c60c${s}${y}${p}`)
   const json = await res.json()
 
+  //API response가 있는 경우 받아온 API를 받아서 출력
   if (json.Response === 'True') {
-    const { Search: movies, totalResults } = json
+    const { Search: movies, totalResults } = json;
 
+    $movieCounter.innerHTML = "";
+    const strong = document.createElement('span');
+    const text = document.createTextNode('개의 영화가 검색되었습니다');
+    $movieCounter.appendChild(strong);
+    strong.textContent = totalResults;
+    
+    $movieCounter.appendChild(strong);
+    $movieCounter.appendChild(text);
+    
     MovieList (movies);
-    return search.page
   }
 
+  //영화검색이 되지 않았을때
   if (json.Error) {
     if (searched) {
-
+      //검색결과가 노출중일 때 (top버튼 생성)
       const topBtn = document.createElement('button');
       $err.appendChild(topBtn);
       topBtn.classList.add('material-symbols-outlined')
@@ -49,7 +63,7 @@ async function getMovies() {
       searched = false;
 
     } else {
-
+      //검색결과가 노출중이지 않을 때
       const pEl = document.createElement('p');
       $err.appendChild(pEl);
       pEl.textContent = "검색결과가 없습니다."
@@ -59,6 +73,7 @@ async function getMovies() {
   }
 }
 
+//받아온 영화 API목록을 html 코드위에 생성
 async function MovieList (movies) {
   searched = true;
 
@@ -90,13 +105,16 @@ async function MovieList (movies) {
   }
 }
 
+// 영화검색 submit
 $searchForm.addEventListener('submit',function(e){
   e.preventDefault();
 
+  // 검색정보 저장
   search.keyword = $input.value;
   search.year = $years.value === "all" ? "" : $years.value;
   search.page = 1
 
+  // 검색목록 초기화
   $movies.innerHTML = "";
   $err.innerHTML = "";
 
@@ -104,6 +122,7 @@ $searchForm.addEventListener('submit',function(e){
 });
 
 
+//무한스크롤 구현
 window.addEventListener('scroll', function(){
   if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight) {
     if (searched) {
