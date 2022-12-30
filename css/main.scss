@@ -1,0 +1,108 @@
+
+/* COMMON */
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --fm-black: #201c1b;
+  --fm-white: #f2f2f2;
+  --primary-color: #c23616;
+  --righter-primary: #e84118;
+}
+
+* {box-sizing: border-box;}
+
+body {
+  color: var(--fm-white);
+  font-family: 'Pretendard-Regular', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: var(--fm-black);
+}
+
+a,a:active,a:link,a:hover,a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+input{
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* MAIN */
+
+#wrap {
+  margin: 0 auto;
+  max-width: 1420px;
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    h1 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      
+      a {
+        display: flex;
+        align-items: center;
+        font-size: 55px;
+        letter-spacing: -2px;
+        font-weight: 800;
+
+        .logo {
+          width: 55px;
+          margin-right: 10px;
+
+          img {
+            display: block;
+            width: 100%;
+          }
+        }//.logo
+      } //a
+    } //h1
+
+    form {
+      display: flex;
+
+      input {
+        padding: 0 15px;
+        min-width: 400px;
+        height: 40px;
+        color: var(--fm-white);
+        // background-color: var(--fm-white);
+        border: 2px solid var(--primary-color);
+        border-right: none;
+      }
+      
+      button {
+        padding: 0 10px;
+        height: 40px;
+        color: inherit;
+        background-color: var(--primary-color);
+      }
+    } //form
+  } //main
+} //wrap
+
+.movies {
+  transform: translateY(-150px);
+  background-color: gray;
+}

@@ -1,1 +1,97 @@
-/*# sourceMappingURL=main.css.map */
+/* COMMON */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+:root {
+  --fm-black: #201c1b;
+  --fm-white: #f2f2f2;
+  --primary-color: #c23616;
+  --righter-primary: #e84118;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--fm-white);
+  font-family: "Pretendard-Regular", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: var(--fm-black);
+}
+
+a, a:active, a:link, a:hover, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* MAIN */
+#wrap {
+  margin: 0 auto;
+  max-width: 1420px;
+}
+#wrap main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+#wrap main h1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+#wrap main h1 a {
+  display: flex;
+  align-items: center;
+  font-size: 55px;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+#wrap main h1 a .logo {
+  width: 55px;
+  margin-right: 10px;
+}
+#wrap main h1 a .logo img {
+  display: block;
+  width: 100%;
+}
+#wrap main form {
+  display: flex;
+}
+#wrap main form input {
+  padding: 0 15px;
+  min-width: 400px;
+  height: 40px;
+  color: var(--fm-white);
+  border: 2px solid var(--primary-color);
+  border-right: none;
+}
+#wrap main form button {
+  padding: 0 10px;
+  height: 40px;
+  color: inherit;
+  background-color: var(--primary-color);
+}
+
+.movies {
+  transform: translateY(-150px);
+  background-color: gray;
+}/*# sourceMappingURL=main.css.map */
