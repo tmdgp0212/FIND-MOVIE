@@ -8,6 +8,8 @@ const $err = $movieContainer.querySelector(".err");
 const $more = document.querySelector(".more");
 const $select = document.querySelector("form>select");
 
+let movieID = '';
+export default movieID;
 
 // 검색키워드를 저장
 const search = {
@@ -93,7 +95,7 @@ async function MovieList (movies) {
       infoEl.appendChild(yearEl);
       infoEl.appendChild(titleEl);
   
-      aEl.setAttribute('href',`/movie/${movie.imdbID}`)
+      aEl.setAttribute('href','javascript:void(0)')
       imgEl.classList.add('poster');
       imgEl.style.backgroundImage = `url(${movie.Poster === "N/A" ? "/images/no_image.png" : movie.Poster})`;
       infoEl.classList.add('info');
