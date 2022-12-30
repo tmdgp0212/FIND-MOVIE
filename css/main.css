@@ -7,6 +7,8 @@
 }
 :root {
   --fm-black: #201c1b;
+  --fm-gray: #4b4442;
+  --fm-lightgray: #847c7a;
   --fm-white: #f2f2f2;
   --primary-color: #c23616;
   --righter-primary: #e84118;
@@ -76,13 +78,28 @@ button {
 #wrap main form {
   display: flex;
 }
-#wrap main form input {
+#wrap main form select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0 15px 0 10px;
+  color: rgba(32, 28, 27, 0.6666666667);
+  background-color: var(--fm-white);
+  border: 2px solid var(--primary-color);
+  border-right: none;
+}
+#wrap main form input[type=text] {
   padding: 0 15px;
   min-width: 400px;
   height: 40px;
-  color: var(--fm-white);
+  color: var(--fm-black);
+  background-color: var(--fm-white);
   border: 2px solid var(--primary-color);
   border-right: none;
+  border-left: none;
 }
 #wrap main form button {
   padding: 0 10px;
@@ -90,8 +107,80 @@ button {
   color: inherit;
   background-color: var(--primary-color);
 }
+#wrap main form button:hover {
+  background-color: var(--righter-primary);
+}
+#wrap .movies {
+  transform: translateY(-80px);
+}
+#wrap .movies ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  row-gap: 80px;
+}
+#wrap .movies ul li {
+  position: relative;
+  width: 250px;
+  overflow: hidden;
+}
+#wrap .movies ul li:hover .info {
+  transform: translateY(0px);
+}
+#wrap .movies ul li a .poster {
+  width: 250px;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#wrap .movies ul li a .info {
+  position: absolute;
+  bottom: 0;
+  padding: 35px 10px 15px;
+  width: 250px;
+  height: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6666666667), rgba(0, 0, 0, 0.8666666667), #000000);
+  transition: transform 0.4s;
+}
+#wrap .movies ul li a .info .year {
+  display: block;
+  margin-bottom: 10px;
+}
+#wrap .movies ul li a .info .title {
+  display: block;
+  font-size: 20px;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#wrap .movies p {
+  margin-top: -25px;
+  text-align: center;
+}
+#wrap .movies button.material-symbols-outlined {
+  display: block;
+  margin: 80px auto 0;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  border: 1px solid #000;
+  border-radius: 50%;
+  transition: background-color 0.1s;
+}
+#wrap .movies button.material-symbols-outlined:hover {
+  background-color: var(--righter-primary);
+}
 
-.movies {
-  transform: translateY(-150px);
-  background-color: gray;
+.more {
+  height: 30px;
+  height: 0;
+  background-image: url(../images/logo_FM_rd.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: height 0.2s;
 }/*# sourceMappingURL=main.css.map */

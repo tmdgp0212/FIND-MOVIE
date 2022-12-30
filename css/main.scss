@@ -10,6 +10,8 @@
 
 :root {
   --fm-black: #201c1b;
+  --fm-gray: #4b4442;
+  --fm-lightgray: #847c7a;
   --fm-white: #f2f2f2;
   --primary-color: #c23616;
   --righter-primary: #e84118;
@@ -82,14 +84,30 @@ button {
     form {
       display: flex;
 
-      input {
+      select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+
+        padding: 0 15px 0 10px;
+        color: #201c1baa;
+        background-color: var(--fm-white);
+        border: 2px solid var(--primary-color);
+        border-right: none;
+      }
+
+      input[type="text"] {
         padding: 0 15px;
         min-width: 400px;
         height: 40px;
-        color: var(--fm-white);
-        // background-color: var(--fm-white);
+        color: var(--fm-black);
+        background-color: var(--fm-white);
         border: 2px solid var(--primary-color);
         border-right: none;
+        border-left: none;
       }
       
       button {
@@ -97,12 +115,101 @@ button {
         height: 40px;
         color: inherit;
         background-color: var(--primary-color);
+
+        &:hover {
+          background-color: var(--righter-primary);
+        }
       }
     } //form
   } //main
+  
+  .movies {
+    transform: translateY(-80px);
+  
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 40px;
+      row-gap: 80px;
+  
+      li {
+        position: relative;
+        width: 250px;
+        overflow: hidden;
+  
+        &:hover {
+          
+          .info {transform: translateY(0px);}
+        }
+  
+        a {
+  
+          .poster {
+            width: 250px;
+            height: 380px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+  
+          .info {
+            position: absolute;
+            bottom: 0;
+            padding: 35px 10px 15px;
+            width: 250px;
+            height: 100px;
+            background: linear-gradient(#00000000,#000000aa,#000000dd,#000000);
+            // transform: translateY(100px);
+            transition: transform .4s;
+  
+            .year {
+              display: block;
+              margin-bottom: 10px;
+              // color: var(--fm-lightgray);
+            }
+  
+            .title {
+              display: block;
+              font-size: 20px;
+              word-break: keep-all;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }//a
+      }//li
+    }//ul
+
+    p {
+      margin-top: -25px;
+      text-align: center;
+    }
+
+    button.material-symbols-outlined {
+      display: block;
+      margin: 80px auto 0;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary-color);
+      border: 1px solid #000;
+      border-radius: 50%;
+      transition: background-color .1s;
+
+      &:hover {
+        background-color:var(--righter-primary);
+      }
+    }
+  }//.movies
 } //wrap
 
-.movies {
-  transform: translateY(-150px);
-  background-color: gray;
+.more {
+  height: 30px;
+  height: 0;
+  background-image: url(../images/logo_FM_rd.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: height .2s;
 }

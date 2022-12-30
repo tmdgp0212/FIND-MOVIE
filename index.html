@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Find Movie</title>
   <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
   <link rel="stylesheet" href="/css/main.css">
   <script defer type="module" src="./js/main.js"></script>
@@ -22,13 +23,23 @@
         </a>
       </h1>
       <form>
+        <select name="years" id="years">
+          <option value="all">All Years</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select>
         <input type="text" placeholder="Let's Find Movies you want!">
         <button>Search</button>
       </form>
     </main>
     <div class="movies">
       <ul></ul>
+      <div class="err"></div>
     </div>
+  </div>
+  <div class="more">
+    
   </div>
 </body>
 </html>
