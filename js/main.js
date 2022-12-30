@@ -1,3 +1,6 @@
+
+/* 메인페이지 */
+
 const $searchForm = document.querySelector("main>form");
 const $input = $searchForm.querySelector("input");
 const $years = $searchForm.querySelector("select");
@@ -103,6 +106,15 @@ async function MovieList (movies) {
       yearEl.classList.add('year');
       titleEl.textContent = movie.Title;
       titleEl.classList.add('title');
+
+      //영화 포스터 클릭 시 디테일 창 팝업
+      aEl.addEventListener('click',function(){
+        background.style.display = 'flex';
+        loading.style.display = "block";
+
+        resetDetail();
+        getDetail(movie.imdbID);
+      });
     }
   }
 }
@@ -142,4 +154,65 @@ for (let i = 0; i <= 35; i++) {
   option.textContent = year;
 
   $select.appendChild(option);
+}
+
+
+/* 상세페이지 */
+
+const background = document.querySelector('aside');
+const poster = background.querySelector('.poster');
+const title = background.querySelector('.info>.title>h2');
+const rated = background.querySelector('.info>.title>.rated');
+const released = background.querySelector('.info>.released');
+const genre = background.querySelector('.info>.genre');
+const runTime = background.querySelector('.info>.run-time');
+const plot = background.querySelector('.info>p');
+const director = background.querySelector('.info>.director');
+const writer = background.querySelector('.info>.writer');
+const actors = background.querySelector('.info>.actors');
+
+const loading = background.querySelector('.loading');
+
+background.addEventListener('click',function(e){
+  if(e.target === e.currentTarget){
+    background.style.display = 'none';
+  }
+});
+
+async function getDetail(id) {
+  const res = await fetch(`https://www.omdbapi.com/?apikey=7035c60c&i=${id}`);
+  const json = await res.json()
+
+  if (json.Response === 'True') {
+    const movie = json
+
+    loading.style.display = "none";
+
+    poster.style.backgroundImage = `url(${movie.Poster})`
+    title.textContent = movie.Title;
+    rated.textContent = `⭐ ${movie.imdbRating}`
+    released.textContent = movie.Released;
+    genre.textContent = `💃 ${movie.Genre}`;
+    runTime.textContent = `⏰ ${movie.Runtime}`;
+    director.innerHTML = `<span>Director</span> ${movie.Director}`
+    writer.innerHTML = `<span>Writer</span> ${movie.Writer}`
+    actors.innerHTML = `<span>Actors</span> ${movie.Actors}`
+    plot.textContent = movie.Plot;
+  }
+
+  json.Error
+}
+
+function resetDetail () {
+      
+  poster.style.backgroundImage = `url(/images/no_image.png)`
+  title.textContent = '';   
+  rated.textContent = '';
+  released.textContent = '';
+  genre.textContent = '';
+  runTime.textContent = '';
+  director.textContent = '';
+  writer.textContent = '';
+  actors.textContent = '';
+  plot.textContent = '';
 }

@@ -135,9 +135,10 @@ button {
   position: relative;
   width: 250px;
   overflow: hidden;
+  transition: transform 0.2s;
 }
-#wrap .movies ul li:hover .info {
-  transform: translateY(0px);
+#wrap .movies ul li:hover {
+  transform: scale(1.03);
 }
 #wrap .movies ul li a .poster {
   width: 250px;
@@ -168,7 +169,6 @@ button {
   white-space: nowrap;
 }
 #wrap .movies p {
-  margin-top: -25px;
   text-align: center;
 }
 #wrap .movies button.material-symbols-outlined {
@@ -183,4 +183,105 @@ button {
 }
 #wrap .movies button.material-symbols-outlined:hover {
   background-color: var(--righter-primary);
+}
+
+aside {
+  display: flex;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+aside .movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 800px;
+  height: 500px;
+  background-color: var(--fm-gray);
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.4);
+}
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+aside .movie .loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  border: 7px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  transform: translate(-30px, -30px);
+  -webkit-animation: loading 1.8s linear infinite;
+          animation: loading 1.8s linear infinite;
+}
+aside .movie .poster {
+  width: 300px;
+  height: 430px;
+  border-radius: 5px;
+  background-color: var(--fm-white);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.3);
+}
+aside .movie .info {
+  padding: 20px;
+  width: 400px;
+  height: 430px;
+}
+aside .movie .info .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+aside .movie .info .title h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+aside .movie .info .title .rated {
+  letter-spacing: 2px;
+}
+aside .movie .info .released {
+  color: var(--fm-lightgray);
+}
+aside .movie .info .genre {
+  margin: 15px 0 8px;
+}
+aside .movie .info .run-time {
+  margin-bottom: 20px;
+}
+aside .movie .info .director, aside .movie .info .writer, aside .movie .info .actors {
+  font-size: 12px;
+}
+aside .movie .info .director span, aside .movie .info .writer span, aside .movie .info .actors span {
+  color: var(--fm-lightgray);
+  line-height: 1.2;
+}
+aside .movie .info p {
+  margin-top: 20px;
+  line-height: 1.2;
 }/*# sourceMappingURL=main.css.map */
