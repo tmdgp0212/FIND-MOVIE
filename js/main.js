@@ -132,3 +132,12 @@ window.addEventListener('scroll', function(){
   }
 });
 
+for (let i = 0; i <= 35; i++) {
+  const year = new Date().getFullYear() - i 
+
+  const option = document.createElement('option');
+  option.setAttribute('value', year);
+  option.textContent = year;
+
+  $select.appendChild(option);
+}
