@@ -1,14 +1,15 @@
 
 /* 메인페이지 */
 
+const $main = document.querySelector("main");
 const $searchForm = document.querySelector("main>form");
 const $input = $searchForm.querySelector("input");
 const $years = $searchForm.querySelector("select");
 const $movieContainer = document.querySelector(".movies");
+const $loading = $movieContainer.querySelector(".loading");
 const $movieCounter = $movieContainer.querySelector('h3');
 const $movies = $movieContainer.querySelector("ul");
 const $err = $movieContainer.querySelector(".err");
-const $more = document.querySelector(".more");
 const $select = document.querySelector("form>select");
 
 let movieID = '';
@@ -32,9 +33,13 @@ async function getMovies() {
   const res = await fetch(`https://omdbapi.com/?apikey=7035c60c${s}${y}${p}`)
   const json = await res.json()
 
+  $loading.style.display = "block";
+
   //API response가 있는 경우 받아온 API를 받아서 출력
   if (json.Response === 'True') {
     const { Search: movies, totalResults } = json;
+
+    $loading.style.display = "none";
 
     $movieCounter.innerHTML = "";
     const strong = document.createElement('span');
@@ -50,6 +55,9 @@ async function getMovies() {
 
   //영화검색이 되지 않았을때
   if (json.Error) {
+
+    $loading.style.display = "none";
+    
     if (searched) {
       //검색결과가 노출중일 때 (top버튼 생성)
       const topBtn = document.createElement('button');
@@ -65,16 +73,12 @@ async function getMovies() {
         window.scrollTo({top:0, behavior:"smooth"});
       });
 
-      searched = false;
-
     } else {
       //검색결과가 노출중이지 않을 때
-      const pEl = document.createElement('p');
-      $err.appendChild(pEl);
-      pEl.textContent = "검색결과가 없습니다."
-      
-      searched = false;
+      $movieCounter.textContent = "검색결과가 없습니다."
     }
+
+    searched = false;
   }
 }
 
@@ -130,7 +134,11 @@ $searchForm.addEventListener('submit',function(e){
 
   // 검색목록 초기화
   $movies.innerHTML = "";
+  $movieCounter.innerHTML = "";
   $err.innerHTML = "";
+  searched = false;
+
+  $main.style.height = "70vh";
 
   getMovies();
 });
