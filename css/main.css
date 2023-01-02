@@ -140,8 +140,12 @@ button {
 #wrap main form button:hover {
   background-color: var(--righter-primary);
 }
+#wrap .movies {
+  padding: 15px 0;
+}
 #wrap .movies .loading {
   display: none;
+  margin: 20px auto;
 }
 #wrap .movies h3 {
   text-align: center;

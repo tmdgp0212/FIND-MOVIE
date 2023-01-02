@@ -143,7 +143,12 @@ button {
   } //main
   
   .movies {
-    .loading {display: none;}
+    padding: 15px 0;
+
+    .loading {
+      display: none;
+      margin: 20px auto;
+    }
 
     h3 {
       text-align: center;

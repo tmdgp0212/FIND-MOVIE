@@ -33,8 +33,6 @@ async function getMovies() {
   const res = await fetch(`https://omdbapi.com/?apikey=7035c60c${s}${y}${p}`)
   const json = await res.json()
 
-  $loading.style.display = "block";
-
   //API response가 있는 경우 받아온 API를 받아서 출력
   if (json.Response === 'True') {
     const { Search: movies, totalResults } = json;
@@ -139,6 +137,7 @@ $searchForm.addEventListener('submit',function(e){
   searched = false;
 
   $main.style.height = "70vh";
+  $loading.style.display = "block";
 
   getMovies();
 });
@@ -149,6 +148,8 @@ window.addEventListener('scroll', function(){
   if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight) {
     if (searched) {
       search.page++;
+      $loading.style.display = "block";
+      
       getMovies();
     }
   }
