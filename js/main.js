@@ -161,9 +161,9 @@ for (let i = 0; i <= 35; i++) {
 
 const background = document.querySelector('aside');
 const poster = background.querySelector('.poster');
-const title = background.querySelector('.info>.title>h2');
-const rated = background.querySelector('.info>.title>.rated');
-const released = background.querySelector('.info>.released');
+const title = background.querySelector('.info>h2');
+const rated = background.querySelector('.info>.flex-box>.rated');
+const released = background.querySelector('.info>.flex-box>.released');
 const genre = background.querySelector('.info>.genre');
 const runTime = background.querySelector('.info>.run-time');
 const plot = background.querySelector('.info>p');

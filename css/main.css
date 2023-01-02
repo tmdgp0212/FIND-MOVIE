@@ -253,19 +253,20 @@ aside .movie .info {
   width: 400px;
   height: 430px;
 }
-aside .movie .info .title {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-}
-aside .movie .info .title h2 {
+aside .movie .info h2 {
   font-size: 36px;
   font-weight: 600;
 }
-aside .movie .info .title .rated {
-  letter-spacing: 2px;
+aside .movie .info .flex-box {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
-aside .movie .info .released {
+aside .movie .info .flex-box .rated {
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+aside .movie .info .flex-box .released {
   color: var(--fm-lightgray);
 }
 aside .movie .info .genre {
@@ -279,7 +280,7 @@ aside .movie .info .director, aside .movie .info .writer, aside .movie .info .ac
 }
 aside .movie .info .director span, aside .movie .info .writer span, aside .movie .info .actors span {
   color: var(--fm-lightgray);
-  line-height: 1.2;
+  line-height: 1.4;
 }
 aside .movie .info p {
   margin-top: 20px;

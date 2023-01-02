@@ -273,23 +273,24 @@ aside {
       width: 400px;
       height: 430px;
 
-      .title {
+      h2{
+        font-size: 36px;
+        font-weight: 600;
+      }
+
+      .flex-box {
+        margin-top: 10px;
         display: flex;
         justify-content: space-between;
-        align-items: end;
-
-        h2{
-          font-size: 36px;
-          font-weight: 600;
-        }
 
         .rated {
           letter-spacing: 2px;
+          white-space: nowrap;
         }
-      }
 
-      .released {
-        color: var(--fm-lightgray);
+        .released {
+          color: var(--fm-lightgray);
+        }
       }
 
       .genre {
@@ -305,7 +306,7 @@ aside {
 
         span {
           color: var(--fm-lightgray);
-          line-height: 1.2;
+          line-height: 1.4;
         }
       }
 
