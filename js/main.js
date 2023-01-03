@@ -1,19 +1,15 @@
-
 /* 메인페이지 */
 
-const $main = document.querySelector("main");
-const $searchForm = document.querySelector("main>form");
-const $input = $searchForm.querySelector("input");
-const $years = $searchForm.querySelector("select");
-const $movieContainer = document.querySelector(".movies");
-const $loading = $movieContainer.querySelector(".loading");
-const $movieCounter = $movieContainer.querySelector('h3');
-const $movies = $movieContainer.querySelector("ul");
-const $err = $movieContainer.querySelector(".err");
-const $select = document.querySelector("form>select");
-
-let movieID = '';
-export default movieID;
+const mainEl = document.querySelector("main");
+const FormEl = document.querySelector("main>form");
+const inputEl = FormEl.querySelector("input");
+const yearsEl = FormEl.querySelector("select");
+const movieContainerEl = document.querySelector(".movies");
+const mainLoadingEl = movieContainerEl.querySelector(".loading");
+const CounterEl = movieContainerEl.querySelector('h3');
+const moviesEl = movieContainerEl.querySelector("ul");
+const errEl = movieContainerEl.querySelector(".err");
+const selectEl = document.querySelector("form>select");
 
 // 검색키워드를 저장
 const search = {
@@ -37,107 +33,111 @@ async function getMovies() {
   if (json.Response === 'True') {
     const { Search: movies, totalResults } = json;
 
-    $loading.style.display = "none";
+    mainLoadingEl.style.display = "none";
 
-    $movieCounter.innerHTML = "";
-    const strong = document.createElement('span');
-    const text = document.createTextNode('개의 영화가 검색되었습니다');
-    $movieCounter.appendChild(strong);
-    strong.textContent = totalResults;
-    
-    $movieCounter.appendChild(strong);
-    $movieCounter.appendChild(text);
-    
+    MovieResult (totalResults);
     MovieList (movies);
   }
 
   //영화검색이 되지 않았을때
   if (json.Error) {
-
-    $loading.style.display = "none";
+    mainLoadingEl.style.display = "none";
     
     if (searched) {
-      //검색결과가 노출중일 때 (top버튼 생성)
-      const topBtn = document.createElement('button');
-      $err.appendChild(topBtn);
-      topBtn.classList.add('material-symbols-outlined')
-      topBtn.classList.add('top')
-      topBtn.textContent = "arrow_upward"
-
-      
-      topBtn.addEventListener('click',function(e){
-        e.preventDefault();
-
-        window.scrollTo({top:0, behavior:"smooth"});
-      });
+      MakeTopBtn(); //검색결과가 노출중일 때 (top버튼 생성)
 
     } else {
-      //검색결과가 노출중이지 않을 때
-      $movieCounter.textContent = "검색결과가 없습니다."
+      CounterEl.textContent = "검색결과가 없습니다." //검색결과가 노출중이지 않을 때
     }
 
     searched = false;
   }
 }
 
+// 토탈영화갯수 출력
+function MovieResult (totalResults) {
+  CounterEl.innerHTML = "";
+
+  const strong = document.createElement('span');
+  const text = document.createTextNode('개의 영화가 검색되었습니다');
+
+  strong.textContent = totalResults;
+  
+  CounterEl.append(strong, text);
+}
+
 //받아온 영화 API목록을 html 코드위에 생성
-async function MovieList (movies) {
+function MovieList (movies) {
   searched = true;
 
-  if(movies) {
-    for(const movie of movies) {
-      const liEl = document.createElement('li')
-      const aEl = document.createElement('a')
-      const imgEl = document.createElement('div')
-      const infoEl = document.createElement('div')
-      const yearEl = document.createElement('span')
-      const titleEl = document.createElement('span')
-  
-      $movies.appendChild(liEl);
-      liEl.appendChild(aEl);
-      aEl.appendChild(imgEl);
-      aEl.appendChild(infoEl);
-      infoEl.appendChild(yearEl);
-      infoEl.appendChild(titleEl);
-  
-      aEl.setAttribute('href','javascript:void(0)')
-      imgEl.classList.add('poster');
-      imgEl.style.backgroundImage = `url(${movie.Poster === "N/A" ? "/images/no_image.png" : movie.Poster})`;
-      infoEl.classList.add('info');
-      yearEl.textContent = movie.Year;
-      yearEl.classList.add('year');
-      titleEl.textContent = movie.Title;
-      titleEl.classList.add('title');
+  for(const movie of movies) {
+    // 필요한 태그 생성
+    const liEl = document.createElement('li')
+    const aEl = document.createElement('a')
+    const imgEl = document.createElement('div')
+    const infoEl = document.createElement('div')
+    const yearEl = document.createElement('span')
+    const titleEl = document.createElement('span')
 
-      //영화 포스터 클릭 시 디테일 창 팝업
-      aEl.addEventListener('click',function(){
-        background.style.display = 'flex';
-        loading.style.display = "block";
+    moviesEl.append(liEl);
+    liEl.append(aEl);
+    aEl.append(imgEl, infoEl);
+    infoEl.append(yearEl, titleEl);
 
-        resetDetail();
-        getDetail(movie.imdbID);
-      });
-    }
+    aEl.setAttribute('href','javascript:void(0)')
+    imgEl.classList.add('poster');
+    imgEl.style.backgroundImage = `url(${movie.Poster === "N/A" ? "/images/no_image.png" : movie.Poster})`;
+    infoEl.classList.add('info');
+    yearEl.textContent = movie.Year;
+    yearEl.classList.add('year');
+    titleEl.textContent = movie.Title;
+    titleEl.classList.add('title');
+
+    //영화 포스터 클릭 시 디테일 창 팝업
+    aEl.addEventListener('click',function(){
+      backgroundEl.style.display = 'flex';
+      detailLoadingEl.style.display = "block";
+
+      getDetail(movie.imdbID);
+    });
   }
 }
 
+function MakeTopBtn() {
+  const topBtn = document.createElement('button');
+  errEl.append(topBtn);
+  topBtn.classList.add('material-symbols-outlined')
+  topBtn.classList.add('top')
+  topBtn.textContent = "arrow_upward"
+  
+  topBtn.addEventListener('click',function(e){
+    e.preventDefault();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+}
+
 // 영화검색 submit
-$searchForm.addEventListener('submit',function(e){
+FormEl.addEventListener('submit',function(e){
   e.preventDefault();
 
+  if(inputEl.value.length < 3) {
+    alert("최소 3글자 이상의 영문검색어를 입력해주세요")
+    return
+  }
+
   // 검색정보 저장
-  search.keyword = $input.value;
-  search.year = $years.value === "all" ? "" : $years.value;
+  search.keyword = inputEl.value;
+  search.year = yearsEl.value === "all" ? "" : yearsEl.value;
   search.page = 1
 
   // 검색목록 초기화
-  $movies.innerHTML = "";
-  $movieCounter.innerHTML = "";
-  $err.innerHTML = "";
+  moviesEl.innerHTML = "";
+  CounterEl.innerHTML = "";
+  errEl.innerHTML = "";
   searched = false;
 
-  $main.style.height = "70vh";
-  $loading.style.display = "block";
+  mainEl.style.height = "70vh";
+  mainLoadingEl.style.display = "block";
 
   getMovies();
 });
@@ -148,13 +148,14 @@ window.addEventListener('scroll', function(){
   if (window.scrollY >= document.documentElement.scrollHeight - window.innerHeight) {
     if (searched) {
       search.page++;
-      $loading.style.display = "block";
+      mainLoadingEl.style.display = "block";
       
       getMovies();
     }
   }
 });
 
+// 년도선택 select창 옵션 채우기
 for (let i = 0; i <= 35; i++) {
   const year = new Date().getFullYear() - i 
 
@@ -162,32 +163,26 @@ for (let i = 0; i <= 35; i++) {
   option.setAttribute('value', year);
   option.textContent = year;
 
-  $select.appendChild(option);
+  selectEl.append(option);
 }
 
 
 /* 상세페이지 */
 
-const background = document.querySelector('aside');
-const poster = background.querySelector('.poster');
-const title = background.querySelector('.info>h2');
-const rated = background.querySelector('.info>.flex-box>.rated');
-const released = background.querySelector('.info>.flex-box>.released');
-const genre = background.querySelector('.info>.genre');
-const runTime = background.querySelector('.info>.run-time');
-const plot = background.querySelector('.info>p');
-const director = background.querySelector('.info>.director');
-const writer = background.querySelector('.info>.writer');
-const actors = background.querySelector('.info>.actors');
+const backgroundEl = document.querySelector('aside');
+const posterEl = backgroundEl.querySelector('.poster');
+const titleEl = backgroundEl.querySelector('.info>h2');
+const ratedEl = backgroundEl.querySelector('.info>.flex-box>.rated');
+const releasedEl = backgroundEl.querySelector('.info>.flex-box>.released');
+const genreEl = backgroundEl.querySelector('.info>.genre');
+const runTimeEl = backgroundEl.querySelector('.info>.run-time');
+const plotEl = backgroundEl.querySelector('.info>p');
+const directorEl = backgroundEl.querySelector('.info>.director');
+const writerEl = backgroundEl.querySelector('.info>.writer');
+const actorsEl = backgroundEl.querySelector('.info>.actors');
+const detailLoadingEl = backgroundEl.querySelector('.loading');
 
-const loading = background.querySelector('.loading');
-
-background.addEventListener('click',function(e){
-  if(e.target === e.currentTarget){
-    background.style.display = 'none';
-  }
-});
-
+// 상세페이지 생성
 async function getDetail(id) {
   const res = await fetch(`https://www.omdbapi.com/?apikey=7035c60c&i=${id}`);
   const json = await res.json()
@@ -195,33 +190,47 @@ async function getDetail(id) {
   if (json.Response === 'True') {
     const movie = json
 
-    loading.style.display = "none";
-
-    poster.style.backgroundImage = `url(${movie.Poster})`
-    title.textContent = movie.Title;
-    rated.textContent = `⭐ ${movie.imdbRating}`
-    released.textContent = movie.Released;
-    genre.textContent = `💃 ${movie.Genre}`;
-    runTime.textContent = `⏰ ${movie.Runtime}`;
-    director.innerHTML = `<span>Director</span> ${movie.Director}`
-    writer.innerHTML = `<span>Writer</span> ${movie.Writer}`
-    actors.innerHTML = `<span>Actors</span> ${movie.Actors}`
-    plot.textContent = movie.Plot;
+    detailLoadingEl.style.display = "none";
+    setDetail(movie);
   }
 
   json.Error
 }
 
-function resetDetail () {
-      
-  poster.style.backgroundImage = `url(/images/no_image.png)`
-  title.textContent = '';   
-  rated.textContent = '';
-  released.textContent = '';
-  genre.textContent = '';
-  runTime.textContent = '';
-  director.textContent = '';
-  writer.textContent = '';
-  actors.textContent = '';
-  plot.textContent = '';
+async function setDetail(movie) {
+  // 상세페이지 내용출력
+  posterEl.style.backgroundImage = `url(${movie.Poster})`
+  titleEl.textContent = movie.Title;
+  ratedEl.textContent = `⭐ ${movie.imdbRating}`
+  releasedEl.textContent = movie.Released;
+  genreEl.textContent = `💃 ${movie.Genre}`;
+  runTimeEl.textContent = `⏰ ${movie.Runtime}`;
+  directorEl.innerHTML = `<span>Director</span> ${movie.Director}`
+  writerEl.innerHTML = `<span>Writer</span> ${movie.Writer}`
+  actorsEl.innerHTML = `<span>Actors</span> ${movie.Actors}`
+  plotEl.textContent = movie.Plot;
 }
+
+function resetDetail () {
+  // 상세페이지 내용초기화   
+  posterEl.style.backgroundImage = `url(/images/no_image.png)`
+  titleEl.textContent = '';   
+  ratedEl.textContent = '';
+  releasedEl.textContent = '';
+  genreEl.textContent = '';
+  runTimeEl.textContent = '';
+  directorEl.textContent = '';
+  writerEl.textContent = '';
+  actorsEl.textContent = '';
+  plotEl.textContent = '';
+}
+
+//상세페이지 닫기
+backgroundEl.addEventListener('click',function(e){
+  if(e.target === e.currentTarget){
+    backgroundEl.style.display = 'none';
+    resetDetail();
+  }
+});
+
+

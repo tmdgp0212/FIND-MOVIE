@@ -140,9 +140,6 @@ button {
 #wrap main form button:hover {
   background-color: var(--righter-primary);
 }
-#wrap .movies {
-  padding: 15px 0;
-}
 #wrap .movies .loading {
   display: none;
   margin: 20px auto;
@@ -252,6 +249,7 @@ aside .movie .poster {
   height: 430px;
   border-radius: 5px;
   background-color: var(--fm-white);
+  background-image: url(/images/no_image.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

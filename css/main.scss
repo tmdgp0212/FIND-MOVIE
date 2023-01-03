@@ -143,7 +143,6 @@ button {
   } //main
   
   .movies {
-    padding: 15px 0;
 
     .loading {
       display: none;
@@ -275,6 +274,7 @@ aside {
       height: 430px;
       border-radius: 5px;
       background-color: var(--fm-white);
+      background-image: url(/images/no_image.png);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
