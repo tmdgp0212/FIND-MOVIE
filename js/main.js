@@ -99,6 +99,7 @@ function MovieList (movies) {
       detailLoadingEl.style.display = "block";
 
       getDetail(movie.imdbID);
+      openModal();
     });
   }
 }
@@ -230,7 +231,16 @@ backgroundEl.addEventListener('click',function(e){
   if(e.target === e.currentTarget){
     backgroundEl.style.display = 'none';
     resetDetail();
+    closeModal();
   }
 });
 
+// 스크롤 비활성화
+const openModal = () => {
+  document.body.style.overflow = "hidden";
+};
 
+// 스크롤 활성화
+const closeModal = () => {
+  document.body.style.overflow = "unset";
+};
