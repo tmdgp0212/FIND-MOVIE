@@ -156,16 +156,18 @@ window.addEventListener('scroll', function(){
   }
 });
 
-// 년도선택 select창 옵션 채우기
-for (let i = 0; i <= 35; i++) {
-  const year = new Date().getFullYear() - i 
-
-  const option = document.createElement('option');
-  option.setAttribute('value', year);
-  option.textContent = year;
-
-  selectEl.append(option);
-}
+// IIFE :: 년도선택 select창 옵션 채우기
+(function() {
+  for (let i = 0; i <= 35; i++) {
+    const year = new Date().getFullYear() - i 
+  
+    const option = document.createElement('option');
+    option.setAttribute('value', year);
+    option.textContent = year;
+  
+    selectEl.append(option);
+  }
+}())
 
 
 /* 상세페이지 */
