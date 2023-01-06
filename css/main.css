@@ -226,6 +226,8 @@ aside {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
 }
 aside .movie {
   display: flex;

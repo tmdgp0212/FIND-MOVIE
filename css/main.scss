@@ -250,6 +250,7 @@ aside {
   height: 100vh;
   background-color: rgba(0,0,0,0.5);
   z-index: 10;
+  backdrop-filter: blur(8px);
 
   .movie{
     display: flex;
