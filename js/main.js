@@ -35,8 +35,8 @@ async function getMovies() {
 
     mainLoadingEl.style.display = "none";
 
-    MovieResult (totalResults);
-    MovieList (movies);
+    resultsCount (totalResults);
+    renderMovies (movies);
   }
 
   //영화검색이 되지 않았을때
@@ -44,7 +44,7 @@ async function getMovies() {
     mainLoadingEl.style.display = "none";
     
     if (searched) {
-      MakeTopBtn(); //검색결과가 노출중일 때 (top버튼 생성)
+      topBtn(); //검색결과가 노출중일 때 (top버튼 생성)
 
     } else {
       CounterEl.textContent = "검색결과가 없습니다." //검색결과가 노출중이지 않을 때
@@ -55,7 +55,7 @@ async function getMovies() {
 }
 
 // 토탈영화갯수 출력
-function MovieResult (totalResults) {
+function resultsCount (totalResults) {
   CounterEl.innerHTML = "";
 
   const strong = document.createElement('span');
@@ -67,7 +67,7 @@ function MovieResult (totalResults) {
 }
 
 //받아온 영화 API목록을 html 코드위에 생성
-function MovieList (movies) {
+function renderMovies (movies) {
   searched = true;
 
   for(const movie of movies) {
@@ -99,12 +99,12 @@ function MovieList (movies) {
       detailLoadingEl.style.display = "block";
 
       getDetail(movie.imdbID);
-      openModal();
+      deactivateScroll();
     });
   }
 }
 
-function MakeTopBtn() {
+function topBtn() {
   const topBtn = document.createElement('button');
   errEl.append(topBtn);
   topBtn.classList.add('material-symbols-outlined')
@@ -202,7 +202,7 @@ async function getDetail(id) {
 
 async function setDetail(movie) {
   // 상세페이지 내용출력
-  posterEl.style.backgroundImage = `url(${movie.Poster})`
+  posterEl.style.backgroundImage = `url(${movie.Poster === "N/A" ? "/images/no_image.png" : movie.Poster})`;
   titleEl.textContent = movie.Title;
   ratedEl.textContent = `⭐ ${movie.imdbRating}`
   releasedEl.textContent = movie.Released;
@@ -216,7 +216,7 @@ async function setDetail(movie) {
 
 function resetDetail () {
   // 상세페이지 내용초기화   
-  posterEl.style.backgroundImage = `url(/images/no_image.png)`
+  posterEl.style.backgroundImage = "url(./images/no_image.png)"
   titleEl.textContent = '';   
   ratedEl.textContent = '';
   releasedEl.textContent = '';
@@ -233,16 +233,16 @@ backgroundEl.addEventListener('click',function(e){
   if(e.target === e.currentTarget){
     backgroundEl.style.display = 'none';
     resetDetail();
-    closeModal();
+    activateScroll();
   }
 });
 
 // 스크롤 비활성화
-const openModal = () => {
+const deactivateScroll = () => {
   document.body.style.overflow = "hidden";
 };
 
 // 스크롤 활성화
-const closeModal = () => {
+const activateScroll = () => {
   document.body.style.overflow = "unset";
 };
