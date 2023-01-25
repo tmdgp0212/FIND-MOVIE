@@ -1,0 +1,297 @@
+@charset "UTF-8";
+/* COMMON */
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@-webkit-keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+:root {
+  --fm-black: #201c1b;
+  --fm-gray: #4b4442;
+  --fm-lightgray: #847c7a;
+  --fm-white: #f2f2f2;
+  --primary-color: #c23616;
+  --righter-primary: #e84118;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--fm-white);
+  font-family: "Pretendard-Regular", "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: var(--fm-black);
+}
+
+a, a:active, a:link, a:hover, a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.loading {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 7px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: loading 1.8s linear infinite;
+          animation: loading 1.8s linear infinite;
+}
+
+/* MAIN */
+#wrap {
+  margin: 0 auto;
+  max-width: 1420px;
+}
+#wrap main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: all 0.4s;
+}
+#wrap main h1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+#wrap main h1 a {
+  display: flex;
+  align-items: center;
+  font-size: 55px;
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+#wrap main h1 a .logo {
+  width: 55px;
+  margin-right: 10px;
+}
+#wrap main h1 a .logo img {
+  display: block;
+  width: 100%;
+}
+#wrap main form {
+  display: flex;
+}
+#wrap main form select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0 15px 0 10px;
+  color: rgba(32, 28, 27, 0.6666666667);
+  background-color: var(--fm-white);
+  border: 2px solid var(--primary-color);
+  border-right: none;
+}
+#wrap main form input[type=text] {
+  padding: 0 15px;
+  min-width: 400px;
+  height: 40px;
+  color: var(--fm-black);
+  background-color: var(--fm-white);
+  border: 2px solid var(--primary-color);
+  border-right: none;
+  border-left: none;
+}
+#wrap main form button {
+  padding: 0 10px;
+  height: 40px;
+  color: inherit;
+  background-color: var(--primary-color);
+}
+#wrap main form button:hover {
+  background-color: var(--righter-primary);
+}
+#wrap .movies .loading {
+  display: none;
+  margin: 20px auto;
+}
+#wrap .movies h3 {
+  text-align: center;
+  line-height: 80px;
+}
+#wrap .movies h3 span {
+  color: var(--primary-color);
+  margin-right: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+#wrap .movies ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  row-gap: 80px;
+}
+#wrap .movies ul li {
+  position: relative;
+  width: 250px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+#wrap .movies ul li:hover {
+  transform: scale(1.03);
+}
+#wrap .movies ul li a .poster {
+  width: 250px;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#wrap .movies ul li a .info {
+  position: absolute;
+  bottom: 0;
+  padding: 35px 10px 15px;
+  width: 250px;
+  height: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6666666667), rgba(0, 0, 0, 0.8666666667), #000000);
+  transition: transform 0.4s;
+}
+#wrap .movies ul li a .info .year {
+  display: block;
+  margin-bottom: 10px;
+}
+#wrap .movies ul li a .info .title {
+  display: block;
+  font-size: 20px;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#wrap .movies button.material-symbols-outlined {
+  display: block;
+  margin: 80px auto 50px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  border: 1px solid #000;
+  border-radius: 50%;
+  transition: background-color 0.1s;
+}
+#wrap .movies button.material-symbols-outlined:hover {
+  background-color: var(--righter-primary);
+}
+
+/* 상세정보창 */
+aside {
+  display: flex;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+aside .movie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 800px;
+  height: 500px;
+  background-color: var(--fm-gray);
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.4);
+}
+aside .movie .loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-30px, -30px);
+}
+aside .movie .poster {
+  width: 300px;
+  height: 430px;
+  border-radius: 5px;
+  background-color: var(--fm-white);
+  background-image: url(/images/no_image.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.3);
+}
+aside .movie .info {
+  padding: 20px;
+  width: 400px;
+  height: 430px;
+}
+aside .movie .info h2 {
+  font-size: 36px;
+  font-weight: 600;
+}
+aside .movie .info .flex-box {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+aside .movie .info .flex-box .rated {
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+aside .movie .info .flex-box .released {
+  color: var(--fm-lightgray);
+}
+aside .movie .info .genre {
+  margin: 15px 0 8px;
+}
+aside .movie .info .run-time {
+  margin-bottom: 20px;
+}
+aside .movie .info .director, aside .movie .info .writer, aside .movie .info .actors {
+  font-size: 12px;
+}
+aside .movie .info .director span, aside .movie .info .writer span, aside .movie .info .actors span {
+  color: var(--fm-lightgray);
+  line-height: 1.4;
+}
+aside .movie .info p {
+  margin-top: 20px;
+  line-height: 1.2;
+}/*# sourceMappingURL=main.css.map */
